@@ -1,5 +1,10 @@
+package Code;
+
+import java.net.Socket;
+
 public class SmtpPranker{
     public static void main(String[] args){
-        System.out.println("Hello");
+        MailSender ms = new MailSender();
+        ms.Run();
     }
 }
