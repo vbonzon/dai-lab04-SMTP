@@ -3,14 +3,15 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.random.*;
 
-public class groupManager {
+public class GroupManager {
 
     ArrayList<String> emailsList;
     ArrayList<String> jokesList;
     int nbrGroup;
     
-    public groupManager(String emailsPath, String jokesPath, int nbrGroup){
+    public GroupManager(String emailsPath, String jokesPath, int nbrGroup){
        emailsList = getArrayFromFile(emailsPath);
        jokesList = getArrayFromFile(jokesPath);
        this.nbrGroup = nbrGroup;
@@ -18,6 +19,13 @@ public class groupManager {
 
 
     public ArrayList<Group> getGroups(){
+
+        ArrayList<Group> listGroup;
+        for(int g = 0; g < nbrGroup; g++){
+            //TODO mettre en paramètre les n premiers emails de la liste
+            //listGroup.add(new Group())
+        }
+
         return new ArrayList<Group>();
     }
 
