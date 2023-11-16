@@ -10,23 +10,36 @@ public class GroupManager {
     ArrayList<String> emailsList;
     ArrayList<String> jokesList;
     int nbrGroup;
+    String mailObject;
     
-    public GroupManager(String emailsPath, String jokesPath, int nbrGroup){
+    public GroupManager(String emailsPath, String jokesPath, int nbrGroup, String mailObject){
        emailsList = getArrayFromFile(emailsPath);
        jokesList = getArrayFromFile(jokesPath);
        this.nbrGroup = nbrGroup;
+       this.mailObject = mailObject;
     }
 
 
     public ArrayList<Group> getGroups(){
 
-        ArrayList<Group> listGroup;
+        ArrayList<Group> listGroup = new ArrayList<>();
         for(int g = 0; g < nbrGroup; g++){
             //TODO mettre en paramètre les n premiers emails de la liste
-            //listGroup.add(new Group())
+            ArrayList<String> emails = new ArrayList<>();
+            
+            int numMail = 5;
+            while(nbrGroup * numMail > emailsList.size() && numMail >= 2){
+                numMail--;
+            }
+            for(int index = numMail*g; index < numMail*(g+1); index++){
+                emails.add(emailsList.get(index));
+            }
+             
+            listGroup.add(new Group(emails, mailObject, jokesList.get(g)));
+            
         }
 
-        return new ArrayList<Group>();
+        return listGroup;
     }
 
     private ArrayList<String> getArrayFromFile(String path){
