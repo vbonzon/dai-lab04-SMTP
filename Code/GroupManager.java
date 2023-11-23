@@ -1,9 +1,19 @@
+/*
+ * File : GroupManager.java
+ * Authors : Valentin Bonzon & Guillaume Dunant
+ * Description : From a email and content list, makes a list of Group
+ */
+
+
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.random.*;
+
+import javax.management.RuntimeErrorException;
+
 
 public class GroupManager {
 
@@ -19,10 +29,19 @@ public class GroupManager {
        this.mailObject = mailObject;
     }
 
-
+    /**
+     * Return an arraylist of group
+     * @return
+     */
     public ArrayList<Group> getGroups(){
 
         ArrayList<Group> listGroup = new ArrayList<>();
+        if(emailsList == null || emailsList.size() == 0){
+            throw new RuntimeException("The email list is empty");
+        }
+        if(jokesList == null || jokesList.size() == 0){
+            throw new RuntimeException("The jokes list is empty");
+        }
         for(int g = 0; g < nbrGroup; g++){
             //TODO mettre en paramètre les n premiers emails de la liste
             ArrayList<String> emails = new ArrayList<>();
@@ -38,10 +57,14 @@ public class GroupManager {
             listGroup.add(new Group(emails, mailObject, jokesList.get(g)));
             
         }
-
         return listGroup;
     }
-
+    
+    /**
+     * Read a file and add each line in a arraylist
+     * @param path
+     * @return An arraylist of each line
+     */
     private ArrayList<String> getArrayFromFile(String path){
 
         try (var reader = new BufferedReader(
@@ -57,18 +80,12 @@ public class GroupManager {
             }
 
             return strArray;
-
-
             
         } catch (Exception e) {
-            System.out.println("Error while oppening a file : " + e);
+            System.out.println("Error while oppening a file : " + e.getMessage());
         }
         
         return null;
-
-        
     }
-
-
 
 }
