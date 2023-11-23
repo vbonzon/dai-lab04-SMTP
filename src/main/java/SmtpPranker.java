@@ -13,11 +13,7 @@ import java.net.Socket;
 
 public class SmtpPranker{
     public static void main(String[] args){
-        /*MailSender ms = new MailSender();
-        ms.Run();*/
-       
-        
-        
+
         if(args.length < 4){
             throw new RuntimeException("Not enough arguments : " + args.length);
         }
@@ -26,6 +22,9 @@ public class SmtpPranker{
         
 
         System.out.println(manager.getGroups().size());
+
+        MailSender ms = new MailSender(manager.getGroups());
+        ms.Run();
         
     }
 
