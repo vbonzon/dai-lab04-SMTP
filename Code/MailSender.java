@@ -6,12 +6,12 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.print.DocFlavor.STRING;
 
 public class MailSender {
 
@@ -23,6 +23,12 @@ public class MailSender {
     private BufferedReader in;
     private BufferedWriter out;
 
+    private ArrayList<Group> groups;
+
+    public MailSender(ArrayList<Group> arrayList){
+      this.groups = arrayList;
+    }
+
     public void Run(){
 
       //Connection to Server
@@ -30,13 +36,25 @@ public class MailSender {
       try (Socket socket = new Socket(SRV_ADDR, SRV_PORT)) {
          in = new BufferedReader(new InputStreamReader(socket.getInputStream(), ENCODING));
          out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), ENCODING));
-            
+         
          System.out.println(getResponse());
-         send("ehlo amogus.ch");
 
-         System.out.println(getResponse());
-         send("quit");
-         System.out.println(getResponse());
+         for(Group group : groups){
+            //Hello
+            sendEhlo();
+
+            //Mail from
+            sendMailFrom(group.sender());
+
+            //Rcpt to
+            sendRcptTo(group.receivers());
+
+            //Data
+            sendData(group);
+         }
+
+         //Quit
+         sendQuit();
       } 
       catch(Exception e){
          System.out.println(e.getMessage());
@@ -46,6 +64,50 @@ public class MailSender {
       }
     }
 
+    private void sendEhlo() throws IOException {
+      sendAndGetResponse("ehlo amogus.ch");
+    }
+
+    private void sendMailFrom(String sender) throws IOException {
+      sendAndGetResponse("Mail from: <" + sender + ">");
+    }
+
+    private void sendRcptTo(List<String> receivers) throws IOException {
+      for(String receiver : receivers){
+         sendAndGetResponse("rcpt to: <" + receiver + ">");
+      }
+    }
+
+    private void sendData(Group group) throws IOException{
+         sendAndGetResponse("data");
+         
+         //From
+         send("From: <" + group.sender() + ">");
+
+         //To
+         StringBuilder sb = new StringBuilder();
+         sb.append("To: ");
+         for(String receiver : group.receivers()){
+            sb.append("<" + receiver + ">, ");
+         }
+         sb.deleteCharAt(sb.lastIndexOf(","));
+         send(sb.toString());
+
+         //Date
+         send("Date: " + new Date());
+
+         //Subject
+         send("Subject: " + group.mailObject());
+
+         //Mail body
+         send("\n" + group.mailContent());
+         sendAndGetResponse("\r\n.\r");
+    }
+
+    private void sendQuit() throws IOException{
+      sendAndGetResponse("quit");
+    }
+
     private List<String> getResponse() throws IOException{
       //Regex
       Pattern pattern = Pattern.compile(RGX_READ);
@@ -53,7 +115,7 @@ public class MailSender {
 
       //Messages
       String line = "";
-      LinkedList<String> messages = new LinkedList<>();
+      ArrayList<String> messages = new ArrayList<>();
 
       //Get the messages from sender
       do{
@@ -70,5 +132,10 @@ public class MailSender {
          out.write(s + "\n");
          out.flush();
          System.out.println("> " + s);
+    }
+
+    private void sendAndGetResponse(String s) throws IOException{
+      send(s);
+      System.out.println(getResponse());
     }
 }
