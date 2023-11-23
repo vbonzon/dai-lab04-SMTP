@@ -23,10 +23,16 @@ public class GroupManager {
     String mailObject;
     
     public GroupManager(String emailsPath, String jokesPath, int nbrGroup, String mailObject){
-       emailsList = getArrayFromFile(emailsPath);
-       jokesList = getArrayFromFile(jokesPath);
-       this.nbrGroup = nbrGroup;
-       this.mailObject = mailObject;
+        emailsList = getArrayFromFile(emailsPath);
+        jokesList = getArrayFromFile(jokesPath);
+        this.nbrGroup = nbrGroup;
+        if(nbrGroup == 0){
+            throw new RuntimeException("Number of groups is not specified");
+        }
+        this.mailObject = mailObject;
+        if(mailObject == null || mailObject == ""){
+            throw new RuntimeException("Mail object is empty");
+        }
     }
 
     /**
