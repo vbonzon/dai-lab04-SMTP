@@ -19,7 +19,7 @@ public class SmtpPranker{
         }
         GroupManager manager = new GroupManager(args[0], args[1], Integer.parseInt(args[3]) , args[2]);
             
-        
+        //TODO : simplifier le chemin pour victimes et jokes 
 
         System.out.println(manager.getGroups().size());
 
