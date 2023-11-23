@@ -15,27 +15,17 @@ public class SmtpPranker{
     public static void main(String[] args){
         /*MailSender ms = new MailSender();
         ms.Run();*/
-        GroupManager manager;
-        for(String s : args){
-            System.out.print(s + ",");
+       
+        
+        
+        if(args.length < 4){
+            throw new RuntimeException("Not enough arguments : " + args.length);
         }
-        System.out.println();
-        try {
-            if(args.length < 4){
-                throw new RuntimeException("Not enough arguments : " + args.length);
-            }
-            manager = new GroupManager(args[0], args[1], Integer.parseInt(args[3]) , args[2]);
-            for(Group gr : manager.getGroups()){
-                System.out.print("Sender: " + gr.sender() + " receivers: ");
-                for(String s : gr.receivers()){
-                    System.out.print(s + ", ");
-                }
-                System.out.println("\nContent: " + gr.mailContent());
+        GroupManager manager = new GroupManager(args[0], args[1], Integer.parseInt(args[3]) , args[2]);
             
-            }
-        } catch (Exception e) {
-            System.out.println("Error while creating groups : " + e.getMessage());
-        }
+        
+
+        System.out.println(manager.getGroups().size());
         
     }
 
