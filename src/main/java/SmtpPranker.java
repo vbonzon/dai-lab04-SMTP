@@ -21,6 +21,7 @@ public class SmtpPranker{
         
          
 
+        
 
         MailSender ms = new MailSender(manager.getGroups());
         ms.Run();
