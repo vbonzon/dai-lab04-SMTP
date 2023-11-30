@@ -56,6 +56,12 @@ public class GroupManager {
             if(contentList == null || contentList.size() == 0){
                 throw new RuntimeException("The jokes list is empty");
             }
+            if(contentList.size()/2 < nbrGroup){
+                throw new RuntimeException("Not enough content for " + nbrGroup + " groups");
+            }
+            if(emailsList.size()/2 < nbrGroup){
+                throw new RuntimeException("Not enough email addresses for " + nbrGroup + " groups");
+            }
             for(int g = 0; g < nbrGroup; g++){
                 
                 ArrayList<String> emails = new ArrayList<>();
@@ -67,7 +73,6 @@ public class GroupManager {
                 for(int index = numMail*g; index < numMail*(g+1); index++){
                     emails.add(emailsList.get(index));
                 }
-                
 
                 listGroup.add(new Group(emails, contentList.get(g*2), contentList.get(g*2+1)));
                 
@@ -77,9 +82,6 @@ public class GroupManager {
            
         }
         return listGroup;
-        
-
-        
         
     }
     
