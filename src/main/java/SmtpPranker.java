@@ -17,14 +17,13 @@ public class SmtpPranker{
         if(args.length < 0){
             throw new RuntimeException("Not enough arguments : " + args.length);
         }
-        GroupManager manager = new GroupManager(Integer.parseInt(args[0]) , args[1]);
+        GroupManager manager = new GroupManager(Integer.parseInt(args[0]));
         
          
 
-        //System.out.println(manager.getGroups().size());
 
         MailSender ms = new MailSender(manager.getGroups());
-        //ms.Run();
+        ms.Run();
         
     }
 

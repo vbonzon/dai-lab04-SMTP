@@ -20,25 +20,22 @@ import javax.management.RuntimeErrorException;
 public class GroupManager {
 
     ArrayList<String> emailsList;
-    ArrayList<String> jokesList;
+    ArrayList<String> contentList;
     int nbrGroup;
-    String mailObject;
     
-    public GroupManager(int nbrGroup, String mailObject){
+    
+    public GroupManager(int nbrGroup){
         try {
-            Path currentRelativePath = Paths.get("");
-            String s = currentRelativePath.toAbsolutePath().toString();
-            System.out.println("Current absolute path is: " + s);
+            
             emailsList = getArrayFromFile("./config/victimes.txt");
-            jokesList = getArrayFromFile("./config/jokes.txt");
+            contentList = getArrayFromFile("./config/jokes.txt");
+
+
             this.nbrGroup = nbrGroup;
             if(nbrGroup == 0){
                 throw new RuntimeException("Number of groups is not specified");
             }
-            this.mailObject = mailObject;
-            if(mailObject == null || mailObject == ""){
-                throw new RuntimeException("Mail object is empty");
-            }
+           
         } catch (Exception e) {
             System.out.println("Error while creating the groupManager : " + e.getMessage());
         }
@@ -56,7 +53,7 @@ public class GroupManager {
             if(emailsList == null || emailsList.size() == 0){
                 throw new RuntimeException("The email list is empty");
             }
-            if(jokesList == null || jokesList.size() == 0){
+            if(contentList == null || contentList.size() == 0){
                 throw new RuntimeException("The jokes list is empty");
             }
             for(int g = 0; g < nbrGroup; g++){
@@ -71,7 +68,8 @@ public class GroupManager {
                     emails.add(emailsList.get(index));
                 }
                 
-                listGroup.add(new Group(emails, mailObject, jokesList.get(g)));
+
+                listGroup.add(new Group(emails, contentList.get(g*2), contentList.get(g*2+1)));
                 
             }
         } catch (Exception e) {

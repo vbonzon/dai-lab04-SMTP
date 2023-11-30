@@ -12,6 +12,7 @@ public class Group {
     private String sender;
     private ArrayList<String> receivers;
     private String mailContent;
+    
 
     private static final String REGEX_EMAIL = "^([\\w\\.\\-_]+)?\\w+@[\\w-_]+(\\.\\w+){1,}$"; 
     private Pattern regex = Pattern.compile(REGEX_EMAIL);
