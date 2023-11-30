@@ -97,10 +97,13 @@ public class MailSender {
          send("Date: " + new Date());
 
          //Subject
-         send("Subject: " + group.mailObject());
+         send("Subject: =?utf-8?Q?" + group.mailObject().replace(' ', '_') + "?=");
+
+         //Content type
+         send("Content-Type: text/plain; charset=utf-8");
 
          //Mail body
-         send("\n" + group.mailContent());
+         send("\n" + group.mailContent().replace("\\n", "\r\n"));
          sendAndGetResponse("\r\n.\r");
     }
 
