@@ -14,17 +14,17 @@ import java.net.Socket;
 public class SmtpPranker{
     public static void main(String[] args){
 
-        if(args.length < 4){
+        if(args.length < 0){
             throw new RuntimeException("Not enough arguments : " + args.length);
         }
-        GroupManager manager = new GroupManager(args[0], args[1], Integer.parseInt(args[3]) , args[2]);
-            
-        //TODO : simplifier le chemin pour victimes et jokes 
+        GroupManager manager = new GroupManager(Integer.parseInt(args[0]) , args[1]);
+        
+         
 
-        System.out.println(manager.getGroups().size());
+        //System.out.println(manager.getGroups().size());
 
         MailSender ms = new MailSender(manager.getGroups());
-        ms.Run();
+        //ms.Run();
         
     }
 

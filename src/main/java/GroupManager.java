@@ -10,6 +10,8 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import javax.management.RuntimeErrorException;
@@ -22,10 +24,13 @@ public class GroupManager {
     int nbrGroup;
     String mailObject;
     
-    public GroupManager(String emailsPath, String jokesPath, int nbrGroup, String mailObject){
+    public GroupManager(int nbrGroup, String mailObject){
         try {
-            emailsList = getArrayFromFile(emailsPath);
-            jokesList = getArrayFromFile(jokesPath);
+            Path currentRelativePath = Paths.get("");
+            String s = currentRelativePath.toAbsolutePath().toString();
+            System.out.println("Current absolute path is: " + s);
+            emailsList = getArrayFromFile("./config/victimes.txt");
+            jokesList = getArrayFromFile("./config/jokes.txt");
             this.nbrGroup = nbrGroup;
             if(nbrGroup == 0){
                 throw new RuntimeException("Number of groups is not specified");
