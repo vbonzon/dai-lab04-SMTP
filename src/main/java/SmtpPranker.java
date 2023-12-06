@@ -18,9 +18,7 @@ public class SmtpPranker{
             throw new RuntimeException("Not enough arguments : " + args.length);
         }
         GroupManager manager = new GroupManager(Integer.parseInt(args[0]));
-        
-         
-
+   
         MailSender ms = new MailSender(manager.getGroups());
         ms.Run();
         

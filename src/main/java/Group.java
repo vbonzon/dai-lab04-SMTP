@@ -42,17 +42,30 @@ public class Group {
         this.mailObject = mailObject; this.mailContent = mailContent;
     }
 
+    /*
+     * Get the mail's sender
+     */
     public String sender(){
         return sender;
     }
 
+    /*
+     * Get the mail's receivers
+     */
     public ArrayList<String> receivers(){
         return receivers;
     }
 
+    /*
+     * Get the mail object
+     */
     public String mailObject(){
         return mailObject;
     }
+
+    /*
+     * Get the mail content
+     */
     public String mailContent(){
         return mailContent;
     }
