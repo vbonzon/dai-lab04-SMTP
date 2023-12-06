@@ -50,3 +50,8 @@ Exemple de communication (> = message du programme, [] = réponse du serveur) :
 
 ### Diagramme de classes de l'application
 ![diagramme de classes](./images/uml.png)
+
+### Classe GroupManager
+La classe GroupManager se charge de lire les deux fichiers de configuration pour créer le nombre de groupes demandé par l'utilisateur. 
+Par exemple si l'utilisateur demande 5 groupes et qu'il y a 20 adresses email dans le fichier victimes.txt, le programme va choisir 20/5=4 adresses email par groupe. 
+Il faut au minimum 2 adresses pour constituer un groupe, le programme indiquera une erreur s'il y en a pas assez.
