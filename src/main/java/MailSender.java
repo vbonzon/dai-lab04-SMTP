@@ -1,3 +1,10 @@
+/*
+ * File : MailSender.java
+ * Authors : Valentin Bonzon & Guillaume Dunant
+ * Description : Send emails to a smtp server from a list of group
+ */
+
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
