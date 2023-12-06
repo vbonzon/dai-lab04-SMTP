@@ -35,6 +35,7 @@ public class GroupManager {
             if(nbrGroup == 0){
                 throw new RuntimeException("Number of groups is not specified");
             }
+            System.out.println("The config files have been correctly read");
            
         } catch (Exception e) {
             System.out.println("Error while creating the groupManager : " + e.getMessage());
@@ -66,7 +67,8 @@ public class GroupManager {
                 
                 ArrayList<String> emails = new ArrayList<>();
                 
-                int numMail = 5;
+                //Get the correct number of email address per group
+                int numMail = nbrGroup;
                 while(nbrGroup * numMail > emailsList.size() && numMail >= 2){
                     numMail--;
                 }
@@ -81,6 +83,7 @@ public class GroupManager {
             System.out.println("Error while creating the groups : " + e.getMessage());
            
         }
+        System.out.println(nbrGroup + " have been created with success");
         return listGroup;
         
     }
