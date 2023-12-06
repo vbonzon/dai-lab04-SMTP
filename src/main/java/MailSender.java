@@ -25,10 +25,18 @@ public class MailSender {
 
     private ArrayList<Group> groups;
 
+    /**
+     * Constructeur
+     * @param arrayList Liste des groupes à qui envoyer les mails
+     */
     public MailSender(ArrayList<Group> arrayList){
       this.groups = arrayList;
     }
 
+    /**
+     * Fonction principale, se connecte au serveur SMTP et envoie
+     * les mails
+     */
     public void Run(){
 
       //Connection to Server
@@ -64,20 +72,39 @@ public class MailSender {
       }
     }
 
+    /**
+     * Envoie le nom du domaine
+     * @throws IOException
+     */
     private void sendEhlo() throws IOException {
       sendAndGetResponse("ehlo amogus.ch");
     }
 
+    /**
+     * Envoie l'adresse de l'envoyeur
+     * @param sender Adresse de l'envoyeur
+     * @throws IOException
+     */
     private void sendMailFrom(String sender) throws IOException {
       sendAndGetResponse("Mail from: <" + sender + ">");
     }
 
+    /**
+     * Envoie la liste d'adresses des destinataires
+     * @param receivers liste des destinataires
+     * @throws IOException
+     */
     private void sendRcptTo(List<String> receivers) throws IOException {
       for(String receiver : receivers){
          sendAndGetResponse("rcpt to: <" + receiver + ">");
       }
     }
 
+    /**
+     * Envoie les en-têtes et le corp de l'email
+     * @param group Group contant les informations à envoyer
+     * @throws IOException
+     */
     private void sendData(Group group) throws IOException{
          sendAndGetResponse("data");
          
@@ -107,10 +134,19 @@ public class MailSender {
          sendAndGetResponse("\r\n.\r");
     }
 
+    /**
+     * Envoie le message pour se déconnecter
+     * @throws IOException
+     */
     private void sendQuit() throws IOException{
       sendAndGetResponse("quit");
     }
 
+    /**
+     * Obtient les messages de réponse du serveurs
+     * @return List<String> contenant les différents messages
+     * @throws IOException
+     */
     private List<String> getResponse() throws IOException{
       //Regex
       Pattern pattern = Pattern.compile(RGX_READ);
@@ -131,12 +167,22 @@ public class MailSender {
       return messages;
     }
     
+    /**
+     * Envoie un message au serveur
+     * @param s Message à envoyer
+     * @throws IOException
+     */
     private void send(String s) throws IOException{
          out.write(s + "\n");
          out.flush();
          System.out.println("> " + s);
     }
 
+    /**
+     * Envoie un message au serveur et attend sa réponse
+     * @param s Message à envoyer
+     * @throws IOException
+     */
     private void sendAndGetResponse(String s) throws IOException{
       send(s);
       System.out.println(getResponse());

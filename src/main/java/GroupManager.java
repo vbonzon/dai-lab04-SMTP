@@ -79,7 +79,7 @@ public class GroupManager {
             }
         } catch (Exception e) {
             System.out.println("Error while creating the groups : " + e.getMessage());
-           
+            return null;
         }
         return listGroup;
         
