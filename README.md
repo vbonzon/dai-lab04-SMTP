@@ -47,3 +47,6 @@ Le programme fonctionne de la manière suivante: Il va commencer par lire les fi
 Exemple de communication (> = message du programme, [] = réponse du serveur) :
 
 ![exemple communication](./images/exemple-communication.png)
+
+### Diagramme de classes de l'application
+![diagramme de classes](./images/uml.png)
