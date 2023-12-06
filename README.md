@@ -18,7 +18,7 @@ Pour utiliser l'application il faut commencer par compiler le code source avec [
 mvn clean package
 ```
 
-Ensuite, il faut copier le dossier **config** (contenant les fichiers jokes.txt et victimes.txt) dans le même répertoire que le fichier .jar (par défaut dans le dossier target). Le fichier **jokes.txt** doit être encodé en UTF-8 et contenir un objet par ligne suivi d'un contenu de mail par ligne comme par exemple :
+Ensuite, il faut créer le dossier **config** (contenant les fichiers jokes.txt et victimes.txt) dans le même répertoire que le fichier .jar (par défaut dans le dossier target). Le fichier **jokes.txt** doit être encodé en UTF-8 et contenir un objet par ligne suivi d'un contenu de mail par ligne comme par exemple :
 ```
 Object1
 Content1
@@ -32,6 +32,7 @@ Pour exécuter l'application, lancer un terminal dans le répertoire où se trou
 ```
 java -jar ./SmtpPranker-1.0.jar <nb groupes>
 ```
+Ensuite le programme indiquera le bon déroulement des opérations et confirmera l'envoi des mails. 
 
 ## Utilisation avec MailDev
 Pour tester notre application, nous avons utilisé [MailDev](https://maildev.github.io/maildev/), qui est un serveur SMTP qui peut recevoir des mails sans les envoyer à des personnes réelles. Pour l'utiliser, il faut avoir [Docker](https://www.docker.com/) installé puis télécharger et lancer l'image avec la commande suivante:
