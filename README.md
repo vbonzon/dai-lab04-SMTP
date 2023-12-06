@@ -53,5 +53,5 @@ Exemple de communication (> = message du programme, [] = réponse du serveur) :
 
 ### Classe GroupManager
 La classe GroupManager se charge de lire les deux fichiers de configuration pour créer le nombre de groupes demandé par l'utilisateur. 
-Par exemple si l'utilisateur demande 5 groupes et qu'il y a 20 adresses email dans le fichier victimes.txt, le programme va choisir 20/5=4 adresses email par groupe. 
-Il faut au minimum 2 adresses pour constituer un groupe, le programme indiquera une erreur s'il y en a pas assez.
+Par exemple si l'utilisateur demande n groupes et qu'il y a 20 adresses email dans le fichier victimes.txt, le programme va choisir 20/n adresses email par groupe. 
+Il faut au minimum 2 adresses pour constituer un groupe donc 2*n adresses email, le programme indiquera une erreur s'il y en a pas assez. Pour le contenu des mails le programme va simplement choisir les n premiers objets et contenu du fichier jokes.txt.
