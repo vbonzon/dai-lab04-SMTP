@@ -54,4 +54,12 @@ Exemple de communication (> = message du programme, [] = réponse du serveur) :
 ### Classe GroupManager
 La classe GroupManager se charge de lire les deux fichiers de configuration pour créer le nombre de groupes demandé par l'utilisateur. 
 Par exemple si l'utilisateur demande n groupes et qu'il y a 20 adresses email dans le fichier victimes.txt, le programme va choisir 20/n adresses email par groupe. 
-Il faut au minimum 2 adresses pour constituer un groupe donc 2*n adresses email, le programme indiquera une erreur s'il y en a pas assez. Pour le contenu des mails le programme va simplement choisir les n premiers objets et contenu du fichier jokes.txt.
+Il faut au minimum 2 adresses pour constituer un groupe donc 2*n adresses email, le programme indiquera une erreur s'il y en a pas assez. Pour le contenu des mails le programme va simplement choisir les n premiers objets et contenus du fichier jokes.txt.
+
+### Classe Group
+La classe Group représente un groupe distringué par l'adresse de l'expéditeur, les adresses des destinataires ainsi que l'objet et le corps du mail. 
+Cette classe est instanciée par GroupManager après avoir lu les fichiers de configuration. La classe MailSender se charge de lire chaque instance de Group pour pouvoir envoyer le mail.
+
+### Classe MailSender
+C'est cette classe qui établi la connexion TCP au server SMTP. Elle va récupérer une liste de groupe et envoyer un mail par groupe en utilisant les informations que le groupe met à disposition. 
+AJOUTER PLUS ?
