@@ -63,4 +63,4 @@ Cette classe est instanciée par GroupManager après avoir lu les fichiers de co
 
 ### Classe MailSender
 C'est cette classe qui établi la connexion TCP au server SMTP. Elle va récupérer une liste de groupe et envoyer un mail par groupe en utilisant les informations que le groupe met à disposition. 
-AJOUTER PLUS ?
+Elle affiche dans le terminal les réponses du serveur SMTP.
